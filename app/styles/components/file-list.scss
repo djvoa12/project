@@ -1,0 +1,117 @@
+.file-list {
+  box-shadow: 0 8px 6px -6px $border-gray;
+  color: $regular-text-gray;
+  font-family: 'Noto Sans JP';
+  margin: 64px 8px 8px 8px;
+
+  .actions-row {
+    padding: 16px 8px 10px;
+
+    .checkbox {
+      margin-left: 5px;
+      margin-right: 16px;
+
+      &.fa-check-square, &.fa-minus-square {
+        color: $blue;
+      }
+    }
+
+    .selected-counter {
+      display: inline-block;
+      width: 170px;
+    }
+
+    .download-link {
+      cursor: pointer;
+
+      &:hover {
+        color: $blue;
+      }
+
+      &.disabled {
+        pointer-events: none;
+      }
+
+      .fa-download {
+        bottom: 1px;
+        font-size: 14px;
+        position: relative;
+      }
+    }
+  }
+
+  .table-container {
+    overflow: auto;
+
+    .file-list-table {
+      border: 1px solid $border-gray;
+      border-collapse: collapse;
+      min-width: 650px;
+      width: 100%;
+
+      thead {
+        tr {
+          th {
+            border-bottom: 1px solid $border-gray;
+            font-weight: normal;
+            padding: 12px 0 8px;
+            text-align: left;
+
+            &.header-status {
+              padding-left: 24px;
+            }
+          }
+        }
+      }
+
+      tbody {
+        .fa-spinner {
+          color: gray;
+          padding: 16px 0;
+        }
+
+        .files-row {
+          &:hover {
+            background: $hover-gray;
+          }
+
+          &.is-checked {
+            background: $selected-gray;
+          }
+
+          td {
+            font-size: 12px;
+            padding: 10px 0;
+
+            .circle-container {
+              display: inline-block;
+              width: 22px;
+
+              .fa-circle {
+                color: $green;
+                font-size: 16px;
+                position: relative;
+                top: 2px;
+              }
+            }
+          }
+
+          .checkbox-container {
+            padding-left: 12px;
+            padding-right: 6px;
+
+            svg {
+              font-size: 16px;
+              position: relative;
+              top: 1px;
+
+              &.fa-check-square {
+                color: $blue;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
