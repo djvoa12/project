@@ -33,7 +33,7 @@ module('Integration | Component | file-list', function(hooks) {
   setupRenderingTest(hooks);
 
   test('component functions properly', async function(assert) {
-    assert.expect(46);
+    assert.expect(50);
 
     window.alert = () => assert.ok(true, 'Alert was triggered by download link');
 
@@ -62,7 +62,7 @@ module('Integration | Component | file-list', function(hooks) {
     assert.equal(page.selectedCounter, 'None Selected');
 
     await page.click1st();
-    assert.ok(page.selectAllIsPartial); //22
+    assert.ok(page.selectAllIsPartial);
     assert.equal(page.selectedCounter, 'Selected 1');
     assert.ok(page.firstIsChecked);
     assert.ok(page.secondIsUnchecked);
@@ -97,7 +97,12 @@ module('Integration | Component | file-list', function(hooks) {
     assert.ok(page.firstIsUnchecked);
     assert.ok(page.secondIsUnchecked);
 
+    await page.click2nd();
+    assert.ok(page.selectAllIsPartial);
+    assert.equal(page.selectedCounter, 'Selected 1');
     await page.selectAll();
+    assert.ok(page.selectAllIsChecked);
+    assert.equal(page.selectedCounter, 'Selected 2', 'clicking on undertermined state selects all');
     page.download();
   });
 });
