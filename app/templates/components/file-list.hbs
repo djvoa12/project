@@ -1,0 +1,90 @@
+<div class="actions-row">
+  {{#if this.selectedFilesCount}}
+    {{#if (eq this.availableFilesCount this.selectedFilesCount)}}
+      <FaIcon
+        @class="checkbox"
+        @icon="check-square"
+        {{action "selectAllAvailableFiles" false}} />
+    {{else}}
+      <FaIcon
+        @class="checkbox"
+        @icon="minus-square"
+        {{action "selectAllAvailableFiles" false}}/>
+    {{/if}}
+  {{else}}
+    <FaIcon
+      @class="checkbox"
+      @icon="square"
+      @prefix="far"
+      {{action "selectAllAvailableFiles" true}} />
+  {{/if}}
+
+  <span class="selected-counter">
+    {{#if this.selectedFilesCount}}
+      Selected {{this.selectedFilesCount}}
+    {{else}}
+      None Selected
+    {{/if}}
+  </span>
+
+  <span
+    class="download-link {{if this.noFilesSelected "disabled"}}"
+    role="button"
+    {{action "downloadFiles"}}>
+    <FaIcon @icon="download" /> Download Selected
+  </span>
+</div>
+
+<div class="table-container">
+  <table class="file-list-table">
+    <thead>
+      <tr>
+        <th></th>
+        <th class="header-name">Name</th>
+        <th class="header-device">Device</th>
+        <th class="header-path">Path</th>
+        <th class="header-status">Status</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {{#if @isLoading}}
+        <tr>
+          <td align="center" colspan="5">
+            <FaIcon @icon="spinner" @size="2x" @spin={{true}} />
+          </td>
+        </tr>
+      {{else}}
+        {{#each this.proxyFiles as |file|}}
+          <tr class="files-row {{if file.isChecked "is-checked"}}">
+            <td class="checkbox-container">
+              {{#if file.isAvailable}}
+                {{#if file.isChecked}}
+                  <FaIcon
+                    @icon="check-square"
+                    {{action (mut file.isChecked) false}} />
+                {{else}}
+                  <FaIcon
+                    @icon="square"
+                    @prefix="far"
+                    {{action (mut file.isChecked) true}} />
+                {{/if}}
+              {{/if}}
+            </td>
+            <td class="name">{{file.name}}</td>
+            <td class="device">{{file.device}}</td>
+            <td class="path">{{file.path}}</td>
+            <td class="status">
+              <span class="circle-container">
+                {{#if file.isAvailable}}
+                  <FaIcon @icon="circle" />
+                {{/if}}
+              </span>
+              {{capitalize file.status}}
+            </td>
+          </tr>
+        {{/each}}
+      {{/if}}
+    </tbody>
+  </table>
+</div>
